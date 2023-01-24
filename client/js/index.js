@@ -1,7 +1,7 @@
 // Add SDK credentials
 // REPLACE WITH YOUR PUBLIC KEY AVAILABLE IN: https://developers.mercadopago.com/panel
-const mercadopago = new MercadoPago('PUBLIC_KEY', {
-  locale: 'YOUR_LOCALE' // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+const mercadopago = new MercadoPago('TEST-0c0b8c64-210f-4620-adb2-bec8950dffc6', {
+  locale: 'pt-BR' // The most common are: 'pt-BR', 'es-AR' and 'en-US'
 });
 
 // Handle call to backend and generate preference.
@@ -15,14 +15,18 @@ document.getElementById("checkout-btn").addEventListener("click", function () {
     price: document.getElementById("unit-price").innerHTML
   };
 
-  fetch("/create_preference", {
+  console.log(orderData)
+
+  /*fetch("http://localhost:8080/create_preference", {
     method: "POST",
+    mode: "no-cors",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(orderData),
   })
     .then(function (response) {
+      console.log(response)
       return response.json();
     })
     .then(function (preference) {
@@ -33,10 +37,18 @@ document.getElementById("checkout-btn").addEventListener("click", function () {
         $(".container_payment").show(500).fadeIn();
       }, 500);
     })
-    .catch(function () {
+    .catch(function (error) {
+      console.log(error)
       alert("Unexpected error");
       $('#checkout-btn').attr("disabled", false);
-    });
+    });*/
+
+  createCheckoutButton("118128724-09ea2d1e-203f-449d-a83a-d1d1842119eb");
+
+  $(".shopping-cart").fadeOut(500);
+  setTimeout(() => {
+    $(".container_payment").show(500).fadeIn();
+  }, 500);
 });
 
 // Create preference when click on checkout button
